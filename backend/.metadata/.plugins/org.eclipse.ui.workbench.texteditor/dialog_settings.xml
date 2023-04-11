@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="corsConfig"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="corsConfig"/>
+			<item value="CorsConfig"/>
+			<item value="cate"/>
+			<item value="cate\"/>
+			<item value="57"/>
+			<item value="delete"/>
+			<item value="r&apos; defined in file [C:\backend\KickAndRush\target\classes\com\kick\controller\CategoryController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;categoryService&apos; defined in file [C:\backend\KickAndRush\target\classes\com\kick\service\CategoryService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;categoryRepository&apos; defined in com.kick.repository.category.CategoryRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Invocation of init method failed; nested exception is org.springframework.data.repository.query.QueryCreationException: Could not create query for public abstract java.util.List com.kick.repository.category.CategoryRepository.findByCategory(); Reason: Failed to create query for method public abstract java.util.List com.kick.repository.category.CategoryRepository.findByCategory()! No property &apos;category&apos; found for type &apos;Category&apos;; nested exception is java.lang.IllegalArgumentException: Failed to create query for method public abstract java.util.List com.kick.repository.category.CategoryRepository.findByCategory()! No property &apos;category&apos; found for type &apos;Category&apos;"/>
+			<item value="findByComment"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="11"/>
+		<item key="DIALOG_Y_ORIGIN" value="80"/>
+		<item key="DIALOG_WIDTH" value="418"/>
+		<item key="DIALOG_HEIGHT" value="523"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+</section>

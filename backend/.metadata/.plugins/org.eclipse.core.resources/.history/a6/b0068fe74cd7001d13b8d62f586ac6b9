@@ -1,0 +1,42 @@
+package com.kick.config;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.security.ConditionalOnDefaultWebSecurity;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+
+import lombok.AllArgsConstructor;
+
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+
+@Configuration
+@AllArgsConstructor
+@ConditionalOnDefaultWebSecurity
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+public class SecurityConfiguration {
+
+    @Bean
+    @Order(SecurityProperties.BASIC_AUTH_ORDER)
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+	        .and()
+	        .formLogin().disable()
+	        .httpBasic().disable()
+	        .authorizeRequests()
+	        .antMatchers("/api/member/**")
+	        .access("hasRole('Role_Member') or hasRole('Role_Admin')")
+	        .antMatchers("/api/admin/**")
+			.access("hasRole('ROLE_ADMIN')")
+			.anyRequest().permitAll();
+         
+        return http.build();
+    }
+
+    
+}
