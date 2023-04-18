@@ -39,6 +39,5 @@ USER CR
 아래는 기능구현에 있어서 도움을 받은 사이트 입니다. 
 https://www.bezkoder.com/react-spring-boot-crud/ <-- react springboot 연동 참조
 https://www.freecodecamp.org/news/how-to-use-recursion-in-react/ <-- react recursive 참조
-제작기간은 1달 2주정도 걸린거같습니다.
 
 감사합니다.
