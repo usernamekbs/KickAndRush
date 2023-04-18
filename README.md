@@ -1,11 +1,9 @@
 # KickAndRush
 
 만든 기능들
-TABLE
-CATEGORY 
-POST
-COMMENT
-ROLES USERS  USER_ROLES 
+댓글 대댓글 CRUD 댓글 개수
+게시판 CURD 검색 조회수
+유저 로그인,회원가입
 
 
 CATEGORY CRUD
