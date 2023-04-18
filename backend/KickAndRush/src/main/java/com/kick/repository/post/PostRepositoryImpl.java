@@ -45,9 +45,9 @@ public class PostRepositoryImpl implements CustomPostRepository{
 				))
                 .from(post)
                 .where(
-                		option.equals("Title") ? null : titleEq(keyword),
-                		option.equals("Content") ? null : contentEq(keyword),
-                		option.equals("Writer") ? null : writerEq(keyword)
+                		option.equals("Title") ? titleEq(keyword) : null,
+                		option.equals("Content") ? contentEq(keyword) : null,
+                		option.equals("Writer") ? writerEq(keyword) : null
                 		)
                 .orderBy(post.pno.desc())
 				.offset(pageable.getOffset())
@@ -70,9 +70,9 @@ public class PostRepositoryImpl implements CustomPostRepository{
 				))
 				.from(post)
                 .where(
-                		option.equals("Title") ? null : titleEq(keyword),
-                		option.equals("Content") ? null : contentEq(keyword),
-                		option.equals("Writer") ? null : writerEq(keyword)
+				option.equals("Title") ? titleEq(keyword) : null,
+                		option.equals("Content") ? contentEq(keyword) : null,
+                		option.equals("Writer") ? writerEq(keyword) : null
                 		);
 		 
 	  return PageableExecutionUtils.getPage(content, pageable, () -> countQuery.fetch().size());
