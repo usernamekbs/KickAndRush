@@ -1,5 +1,18 @@
 # KickAndRush
 
+만든 기능들
+TABLE
+CATEGORY 
+POST
+COMMENT
+ROLES USERS  USER_ROLES 
+
+
+CATEGORY CRUD
+COMMENT CRUD
+POST CRUD
+USER CR
+
 <img width="1111" alt="1" src="https://user-images.githubusercontent.com/126663518/232671196-6a80ae94-bf44-45df-94b8-b06de3505691.png">
 
 <img width="1101" alt="2" src="https://user-images.githubusercontent.com/126663518/232671197-afd5d036-9a7d-49c5-b34c-a6c7b3a3196a.png">
