@@ -10,10 +10,10 @@ CATEGORY CRUD
 COMMENT CRUD
 POST CRUD
 USER CR
-!<img width="1090" alt="2" src="https://user-images.githubusercontent.com/126663518/232706158-62819203-73e2-4366-aa26-abcbc3575e74.png">
+<img width="1090" alt="2" src="https://user-images.githubusercontent.com/126663518/232706158-62819203-73e2-4366-aa26-abcbc3575e74.png">
 
-!<img width="1106" alt="4" src="https://user-images.githubusercontent.com/126663518/232706161-07b6f5ac-15d1-41e8-a681-ed82f928ae2b.png">
-!<img width="963" alt="3" src="https://user-images.githubusercontent.com/126663518/232706277-f814b160-f23d-4327-a532-d37199973be0.png">
+<img width="1106" alt="4" src="https://user-images.githubusercontent.com/126663518/232706161-07b6f5ac-15d1-41e8-a681-ed82f928ae2b.png">
+<img width="963" alt="3" src="https://user-images.githubusercontent.com/126663518/232706277-f814b160-f23d-4327-a532-d37199973be0.png">
 
 <img width="1106" alt="4" src="https://user-images.githubusercontent.com/126663518/232706339-dcb0fdb9-8010-4e3f-bd89-e6aa69d5d88b.png">
 
