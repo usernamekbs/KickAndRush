@@ -36,10 +36,9 @@ USER CR
 <img width="683" alt="13" src="https://user-images.githubusercontent.com/126663518/232706464-321cea70-b676-4894-aaaf-bf45051b2ce2.png">
 
 대댓글 구현을 하려고 만든 사이트입니다.
-대댓글만 넣으면 너무 허접해보일까봐 다른 기능들도 조금 추가해봤습니다.
 아래는 기능구현에 있어서 도움을 받은 사이트 입니다. 
 https://www.bezkoder.com/react-spring-boot-crud/ <-- react springboot 연동 참조
 https://www.freecodecamp.org/news/how-to-use-recursion-in-react/ <-- react recursive 참조
-
+제작기간은 1달 2주정도 걸린거같습니다.
 
 감사합니다.
