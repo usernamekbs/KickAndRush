@@ -21,7 +21,7 @@ public class UserRepositoryImpl implements CustomUserRepository{
 	public Page<UserDto> findAllList(Pageable pageable,String searchText,String searchType) {
 			List<UserDto> result = queryFactory
 							.select(Projections.fields(UserDto.class,
-			                        user.naverId.as("id"), // 수정된 필드 타입
+			                        user.naverId.as("id"),
 			                        user.id.as("naverId"),
 			                        user.name.as("name"),
 			                        user.email.as("email"),
