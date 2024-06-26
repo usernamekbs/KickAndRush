@@ -1,5 +1,9 @@
 package com.kick.web;
 
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +26,8 @@ public class CommentController {
 	private final CommentService commentService;
 	
 	@PostMapping("/create")
-	public CommentDto commentSave(@RequestBody RequestCommentDto requestCommentDto) {
+	public CommentDto commentSave(@RequestBody @Valid RequestCommentDto requestCommentDto) {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!");
 		return commentService.commentSave(requestCommentDto);
 	} 
 	 

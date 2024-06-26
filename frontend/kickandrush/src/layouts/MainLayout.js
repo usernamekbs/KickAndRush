@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
-import Navbar from './Navbar'
+import React from 'react'; 
+import Main from './Main';
+import Header from './Header';
+import Footer from './Footer';
 
 const MainLayout = () => {
+    
+    
     return (
         <>
-          <Navbar />
+            <Header></Header>
+            <Main></Main>
+            <Footer></Footer>
         </>
     );
 

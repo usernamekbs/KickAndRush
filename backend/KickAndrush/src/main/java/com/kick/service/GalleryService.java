@@ -35,7 +35,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class GalleryService {
-	private final String uploadDir = "C:\\source\\frontend\\kickandrush\\src\\thumb\\";
+	private final String uploadDir = "C:\\source\\frontend\\kickandrush\\public\\thumb\\";
+	private final String derectoryUrl = "thumb\\";
 	private final GalleryRepository galleryRepository;
 	private final CategoryRepository categoryRepository;
 	private final UserRepository userRepository;
@@ -60,11 +61,12 @@ public class GalleryService {
 			
 			user = userRepository.findById(requestGalleryDto.getUserId()).orElseThrow(() -> new IllegalArgumentException("해당 유저 번호가 없습니다. =" +requestGalleryDto.getUserId()));
 			category = categoryRepository.findById(requestGalleryDto.getCategoryId()).orElseThrow(() -> new IllegalArgumentException("해당 카테고리 번호가 없습니다. =" +requestGalleryDto.getCategoryId()));
+
 			gallery = Gallery.builder().title(requestGalleryDto.getTitle())
 							.content(requestGalleryDto.getContent())
 							.origName(uuid+"."+file.getOriginalFilename())
 							.contentType(file.getContentType())
-							.filePath(uploadPath+"\\"+uuid+"."+file.getOriginalFilename())
+							.filePath("\\\\"+derectoryUrl+"\\"+uuid+"."+file.getOriginalFilename())
 							.fileSize(file.getSize())
 							.user(user)
 							.categories(category)

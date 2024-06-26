@@ -3,6 +3,8 @@ package com.kick.web;
 import java.io.IOException;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,7 +46,7 @@ public class PostController {
 	}
 	
 	@PostMapping("/create")
-	public PostDto postSave(@RequestPart("requestPostDto") RequestPostDto requestPostDto,
+	public PostDto postSave(@RequestPart("requestPostDto") @Valid  RequestPostDto requestPostDto,
 							@RequestParam(value = "files", required = false) List<MultipartFile> files) throws IOException{
 		return postService.postSave(requestPostDto,files);
 	} 

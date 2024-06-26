@@ -3,14 +3,10 @@ import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
 import Box from "@mui/material/Box";
 import axios from "axios"
-// import useUserStore from "../../stores/useUserStore"
 
 const UpdateReply = (props) => {
     const { setShowReply,  updateComment, setEdit } = props;
     const [comment, setComment] = useState(props.comments.content)
-    // const headers = {
-    //     'Authorization': user.accessToken
-    //   }
 
     const handleUpdateReply  = async(e) => { 
         e.preventDefault(); 

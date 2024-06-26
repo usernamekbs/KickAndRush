@@ -8,9 +8,6 @@ import axios from "axios";
 import { useNavigate  } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import CardMedia from '@mui/material/CardMedia';
 
 const CreateGallery = () => {
@@ -19,7 +16,9 @@ const CreateGallery = () => {
     const categoryId = useParams().categoryId;
     const [readerImages,setReaderImages] = useState();
     const [thumb,setThumb] =useState();
+    const [msg,setErrorMsg] = useState('');
     const navigate = useNavigate();
+    const accessToken = localStorage.getItem('accessToken')
     const userId = localStorage.getItem('userId')
 
     const handleChange = e => {
@@ -51,20 +50,25 @@ const CreateGallery = () => {
 
         try {
             await axios.post(`http://localhost:8080/api/gallery/create/`,formData);
-            navigate('/category4/gallerys')
+            navigate('/category/4/gallerys')
         
         } catch (error) { 
-            console.log(error);
+            if (error.response && error.response.status === 400) {
+                setErrorMsg(error.response.data)
+            }
         }
     };
    
     useEffect(() => {
-    }, []); 
+        if(!accessToken){
+            navigate('/login')
+        }
+    }, [categoryId]); 
 
    
 
     return (
-        <Card sx={{ marginTop:'2%',marginLeft:'25%',minWidth: 275, maxWidth: "50vw", padding: 5 }}>
+        <Card sx={{ width:'1200px' }}>
             <Box>
                 <Typography variant="h5">게시글 쓰기</Typography>
             </Box>
@@ -82,6 +86,11 @@ const CreateGallery = () => {
                 variant="standard"
                 onChange={(e) => setTitle(e.target.value)}
                 />
+                {msg.title&&
+                    <div style={{display:'flex',justifyContent:'center',color:'red'}}>
+                        {msg.title}
+                    </div>
+                }
                 <TextField
                 fullWidth
                 label="내용"

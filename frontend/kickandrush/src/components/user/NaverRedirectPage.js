@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react';
-import {Navigate, useLocation, useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const CallbackPage = () => {
@@ -12,7 +12,6 @@ const CallbackPage = () => {
           const params = new URLSearchParams(location.search);
           const code = params.get('code');
           const state = params.get('state');
-  
           const response = await axios.get('http://localhost:8080/api/user/callback', {
             params: {
               code: code,

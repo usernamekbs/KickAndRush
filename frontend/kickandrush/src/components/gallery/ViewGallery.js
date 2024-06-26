@@ -17,6 +17,7 @@ const ViewGallery = () => {
     const categoryId = useParams().categoryId;
     const userId = localStorage.getItem('userId')
     const email = localStorage.getItem('email')
+    const accessToken = localStorage.getItem('accessToken')
 
     const oneGallery = async () => {
         try {
@@ -37,10 +38,7 @@ const ViewGallery = () => {
         }
     };
 
-    
-
     useEffect(() => {
-
         oneGallery();
     }, []);  
 
@@ -61,12 +59,17 @@ const ViewGallery = () => {
             <Typography variant="body1">
             </Typography>
         </CardContent>
-        <CardActions>
+        
+
+        {accessToken && email===gallery.username && (
+            <CardActions> 
             <Link to={`/category/${categoryId}/gallery/update/${id}`}> 
-              <Button variant="contained" color="success">수정</Button>
+            <Button variant="contained" color="success">수정</Button>
             </Link>
             <Button variant="contained" color="error" onClick={deleteGallery}>삭제</Button>
-        </CardActions>
+          </CardActions>
+        )}
+           
         </Card>
       );
 }

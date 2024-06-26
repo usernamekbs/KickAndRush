@@ -21,7 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 public class OAuthConfig {
-	private static final Logger logger = LoggerFactory.getLogger(OauthController.class);
 	
 	@Value("${oauth.naver.client-id}")
     private String clientId;
@@ -37,12 +36,11 @@ public class OAuthConfig {
     
     @Value("${oauth.naver.token}")
     private String tokenUrl;
-    
+
     @Value("${oauth.naver.user-detail}")
     private String userDetail;
     
     public ResponseEntity<String> getNaverOauthLoginRedirect() {
-    	
         String redirectUrl = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("response_type", "code")
                 .queryParam("client_id", clientId)
@@ -62,10 +60,10 @@ public class OAuthConfig {
 			    map.add("redirect_uri", redirectUri);
 			    map.add("code", code);
 			    map.add("state", state);
-	
 			    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
 			    ResponseEntity<String> token = restTemplate.postForEntity(tokenUrl, request, String.class);
 			    String responseBody = token.getBody();
+
 			    ObjectMapper objectMapper = new ObjectMapper();
 			    TokenDto naverToken = objectMapper.readValue(responseBody,TokenDto.class);
 		    return ResponseEntity.ok(naverToken);
@@ -75,7 +73,6 @@ public class OAuthConfig {
 		HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + accessToken);
         headers.set("Content-Type", "application/json");
-
         HttpEntity<String> entity = new HttpEntity<>(headers);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.exchange(
@@ -84,11 +81,14 @@ public class OAuthConfig {
                 entity,
                 String.class
         );
-    
+        System.out.println("===================!!!!");
         if (response.getStatusCode() == HttpStatus.OK) {
             ObjectMapper objectMapper = new ObjectMapper();
             String responseBody = response.getBody();
+            System.out.println("===================!!!!"+responseBody);
+            System.out.println(responseBody);
             UserResponseDto naverUserDetail = objectMapper.readValue(responseBody, UserResponseDto.class);
+            
             return ResponseEntity.ok(naverUserDetail);
         }
         

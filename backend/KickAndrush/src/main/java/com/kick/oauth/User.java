@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-//commit 테스트
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +34,5 @@ public class User {
 		this.name = naverUserDetailDto.getName();
 		this.email = naverUserDetailDto.getEmail();
 		this.role  = user;
-	}
+    }
 }

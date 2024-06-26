@@ -23,6 +23,7 @@ public class UserDto {
 	
 	public UserDto(User naverUserDetail) {
 		this.naverId = naverUserDetail.getId();
+		this.id		 = naverUserDetail.getNaverId();
 		this.name    = naverUserDetail.getName();
 		this.email   = naverUserDetail.getEmail();
 		this.role 	 = naverUserDetail.getRole();

@@ -3,6 +3,8 @@ package com.kick.web;
 
 import java.io.IOException;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,8 +48,8 @@ public class GalleryController {
 	
 	//입력
 	@PostMapping("/create") 
-	public GalleryDto gallerySave(@RequestPart(value="requestGalleryDto",required=false) RequestGalleryDto requestGalleryDto,
-			@RequestParam(value = "file", required = false)MultipartFile file) throws IOException{
+	public GalleryDto gallerySave(@Valid @RequestPart(value="requestGalleryDto",required=false) RequestGalleryDto requestGalleryDto,
+			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException{
 		return galleryService.gallerySave(requestGalleryDto,file);
 	}
 	

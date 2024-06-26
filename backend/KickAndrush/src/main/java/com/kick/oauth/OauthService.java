@@ -3,21 +3,27 @@ package com.kick.oauth;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import lombok.RequiredArgsConstructor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class OauthService {
-	
+	 private static final Logger logger = LoggerFactory.getLogger(OauthService.class);
 	private final OAuthConfig naverOAuthConfig;
 	private final TokenRepository tokenRepository;
 	private final UserRepository userRepository;  
@@ -27,19 +33,18 @@ public class OauthService {
 		try {
 	        ResponseEntity<TokenDto> naverToken = naverOAuthConfig.getNaverOauthLoginCallback(code,state);
 	        
-	        // 인증 토큰이 유효한지 확인
 	        if (naverToken.getStatusCode() == HttpStatus.OK) {
 	            Token token= new Token(naverToken.getBody().getAccessToken(),naverToken.getBody().getRefreshToken(),naverToken.getBody().getTokenType(),naverToken.getBody().getExpiresIn());
 	            tokenRepository.save(token);
-	            
+	            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	            ResponseEntity<UserResponseDto> naverUserDetails = naverOAuthConfig.getNaverOauthUserDetail(token.getAccessToken());
+	            logger.info("Naver user details retrieved: {}", naverUserDetails);
 	            User detail= new User(naverUserDetails.getBody().getResponse(),ERole.USER);
 	            String email = detail.getEmail();
+	            System.out.println(email);
 	            User existingUser = userRepository.findByEmail(email);
-
-	            // 사용자가 이미 존재하는지 확인 후 처리
+	            System.out.println(naverUserDetails.getBody().getResponse());
 	            if (existingUser != null) {
-	                // 이미 존재하는 사용자이므로 로그인
 	            	LoginDto loginDto = new LoginDto(
 	            			existingUser.getId(),
 	            			naverUserDetails.getBody().getResponse().getId(),
@@ -49,12 +54,13 @@ public class OauthService {
 		                    naverToken.getBody().getExpiresIn(),
 		                    existingUser.getRole()
                     );
-
 	                return ResponseEntity.ok(loginDto);
 	            } else {
 	            	userRepository.save(detail);
 	                existingUser = userRepository.findByEmail(email);
-	                LoginDto loginDto = new LoginDto(
+	                userRepository.save(detail);
+                    existingUser = userRepository.findByEmail(email);
+                    LoginDto loginDto = new LoginDto(
 	                		existingUser.getId(),
 	            			naverUserDetails.getBody().getResponse().getId(),
 		                    naverUserDetails.getBody().getResponse().getName(),
@@ -63,8 +69,7 @@ public class OauthService {
 		                    naverToken.getBody().getExpiresIn(),
 		                    existingUser.getRole()
                     );
-	                
-	                return ResponseEntity.ok(loginDto);
+                    return ResponseEntity.ok(loginDto);
 	            }
 
 	           
@@ -83,9 +88,9 @@ public class OauthService {
 	}
 	
 	@Transactional(readOnly=true)
-	public List<UserDto> userList() {
-		List<User> categories = userRepository.findAll();
-		return categories.stream().map(UserDto::new).collect(Collectors.toList());
+	public Page<UserDto> userList(Pageable pageable,
+			String searchText,String searchType) {
+		return userRepository.findAllList(pageable,searchText,searchType);
 	
 	}
 	

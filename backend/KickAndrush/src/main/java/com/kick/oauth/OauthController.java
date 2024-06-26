@@ -2,7 +2,10 @@ package com.kick.oauth;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +35,6 @@ public class OauthController {
     @GetMapping("/callback")
     public ResponseEntity<LoginDto> callback(@RequestParam("code") String code, @RequestParam("state") String state) throws JsonMappingException, JsonProcessingException {
     	ResponseEntity<LoginDto> naverUser= naverOAuthService.getOAuthNaverLogin(code,state);
-    	
     	return ResponseEntity.ok(naverUser.getBody());
     }
     
@@ -42,8 +44,11 @@ public class OauthController {
 	}
     
     @GetMapping("/list")
-	public List<UserDto> userList(){
-		return naverOAuthService.userList();
+	public Page<UserDto> userList(Pageable pageable,
+			@RequestParam(value="searchText", required=false) String searchText,
+			@RequestParam(value="searchType", required=false) String searchType
+			){
+		return naverOAuthService.userList(pageable,searchText,searchType);
 	}
     
     @DeleteMapping("/delete/{id}")

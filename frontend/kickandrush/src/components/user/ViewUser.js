@@ -37,8 +37,7 @@ const ViewUser = () => {
     };
 
     return (
-        <Card sx={{ marginTop:'2%',marginLeft:'25%',minWidth: 275, maxWidth: "50vw", padding: 5 }}>
-           {console.log(users)}
+        <Card sx={{minWidth: 1200 }}>
            <CardContent key={users.id}>
             <Typography variant="h5" component="div">
                 유저 번호 : {users.id}

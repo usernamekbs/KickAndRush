@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @EnableJpaAuditing
@@ -20,5 +22,10 @@ public class KickAndRushApplication {
 		return p -> {
 			p.setOneIndexedParameters(true);	// 페이지 1부터 시작 기본 default는 false
 		};
+	}
+	
+	@Bean
+	public MultipartResolver multipartResolver() {
+	    return new StandardServletMultipartResolver();
 	}
 }

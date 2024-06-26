@@ -9,9 +9,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Button from "@mui/material/Button";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const User = () => {
     const [userList,setUserList] = useState([]);
+    const [userPage,setUserPage] = useState(1)
+    const [searchType, setSearchType] = useState("Title");
+    const [searchText, setSearchText] = useState("");
+    const [userTotalPages,setUserTotalPages] = useState('1')
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -32,12 +41,21 @@ const User = () => {
         },
       }));
       
+    const handleChange = (e,value) => {
+      setUserPage(value); 
+    };
+
     useEffect(() => {
         const fetchUser = async () => {
-            try {
-              const result = await axios.get(`http://localhost:8080/api/user/list/`
-              );
-              setUserList(result.data)   
+            try { 
+              const result = await axios.get(`http://localhost:8080/api/user/list/?page=${userPage}`, {
+                params: {
+                  searchText: searchText,
+                  searchType: searchType 
+                }
+              });
+              console.log(result)  
+              setUserList(result.data.content)   
             } catch (error) {
               console.log(error);
             }
@@ -46,9 +64,9 @@ const User = () => {
     }, []);  
 
     return (
-      <div style={{marginTop:'3%'}}>
+      <div>
         <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ minWidth: 1200 }} aria-label="customized table">
             <TableHead>
             <TableRow>
                 <StyledTableCell>유저 번호</StyledTableCell>
@@ -57,8 +75,8 @@ const User = () => {
             </TableRow>
             </TableHead>
             <TableBody>
-            {userList.map((user) => (
-                <StyledTableRow key={user.id}>
+            {userList&&userList.map((user) => (
+                <StyledTableRow key={user.naverId}>
                   <StyledTableCell component="th" scope="row">
                       <Link to={`/user/view/${user.naverId}`}>{user.naverId}</Link>
                   </StyledTableCell>
@@ -66,10 +84,31 @@ const User = () => {
                   <StyledTableCell align="right">{user.email}</StyledTableCell>
                 </StyledTableRow>
             ))}
-            
             </TableBody>
         </Table>
         </TableContainer>
+        <div style={{display:'flex',justifyContent:'center'}}>
+            <Stack spacing={2}>
+              <Pagination count={userTotalPages} page={userPage} onChange={handleChange} variant="outlined" color="primary" />
+            </Stack>
+          </div>
+          {/* <div style={{display:'flex',justifyContent:'center'}}>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                onChange={(e)=> setSearchType(e.target.value)}
+                autoWidth
+                label="search"
+                defaultValue="Title"   
+                value={searchType}
+              >
+                <MenuItem value="Title"><em>유저이름</em></MenuItem>
+                <MenuItem value="Content">내용</MenuItem>
+                <MenuItem value="Username">유저이름</MenuItem>
+              </Select>
+              <TextField type="search" id="searchText" label="Search" sx={{ width: 600 }} onChange={(e) => setSearchText(e.target.value)}/>
+              <Button variant="contained" onClick={fetchPost}>검색</Button>
+            </div> */}
       </div>
       );
 

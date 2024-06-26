@@ -17,6 +17,8 @@ const ViewPost = () => {
     const navigate = useNavigate();
     const categoryId = useParams().categoryId;
     const userId = localStorage.getItem('userId');
+    const accessToken = localStorage.getItem('accessToken');
+    const email = localStorage.getItem('email');
 
     const onePost = async () => {
       try {
@@ -69,7 +71,7 @@ const ViewPost = () => {
     }    
 
     return (
-        <Card sx={{ marginTop:'2%',marginLeft:'25%',minWidth: 275, maxWidth: "50vw", padding: 5 }}>
+        <Card sx={{ width:'950px',margin:'0'}}>
           <CardContent>
             <Typography variant="h5" component="div"> 
                 카테고리 : {post.category}
@@ -99,7 +101,7 @@ const ViewPost = () => {
             } 
           
         </CardContent>
-        {/* {user && post.username === user.username && */}
+        {accessToken && email === post.email &&
           <CardActions>
                 <Link to={`/category/${categoryId}/post/update/${id}`} state={{ post: post}}> 
                   <Button variant="contained" color="success">수정</Button>
@@ -107,7 +109,7 @@ const ViewPost = () => {
                 <Button variant="contained" color="error" onClick={deletePost}>삭제</Button>
               
           </CardActions>
-        {/* }  */}
+        } 
         {post.comments && post.comments.map((c)=>{  
           
           return ( 
@@ -115,9 +117,7 @@ const ViewPost = () => {
             )
           })
         }
-        {/* {user && */}
-          <CreateComment postId={id} refreshFunction={updateComment} />
-        {/* } */}
+        <CreateComment postId={id} refreshFunction={updateComment} />
         </Card>
       );
 }
