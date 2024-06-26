@@ -81,12 +81,10 @@ public class OAuthConfig {
                 entity,
                 String.class
         );
-        System.out.println("===================!!!!");
+
         if (response.getStatusCode() == HttpStatus.OK) {
             ObjectMapper objectMapper = new ObjectMapper();
             String responseBody = response.getBody();
-            System.out.println("===================!!!!"+responseBody);
-            System.out.println(responseBody);
             UserResponseDto naverUserDetail = objectMapper.readValue(responseBody, UserResponseDto.class);
             
             return ResponseEntity.ok(naverUserDetail);

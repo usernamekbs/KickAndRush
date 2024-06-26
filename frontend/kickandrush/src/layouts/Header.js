@@ -68,24 +68,25 @@ const Header = () => {
                         <h3>KICKANDRUSH</h3>
                     </div>
                 </section>
+
                 {role==='ADMIN' && 
-                <section className="category">
-                    <nav> 
-                        <ul>
-                            {categoryList && categoryList.map((category) => (
-                                <li key={category.id}>
-                                    <Link to={{
-                                            pathname: `/category/${category.id}/${category.name}`,
-                                        }}
-                                    >
-                                        {category.name}
-                                    </Link> 
-                                </li>
-                                
-                            ))} 
-                        </ul> 
-                    </nav>
-                </section>
+                    <section className="category">
+                        <nav> 
+                            <ul>
+                                {categoryList && categoryList.map((category) => (
+                                    <li key={category.id}>
+                                        <Link to={{
+                                                pathname: `/category/${category.id}/${category.name}`,
+                                            }} style={{color:'white'}}
+                                        >
+                                            {category.name}
+                                        </Link> 
+                                    </li>
+                                    
+                                ))} 
+                            </ul> 
+                        </nav>
+                    </section>
                 }
 
                 {role!=='ADMIN'&&
@@ -99,7 +100,7 @@ const Header = () => {
                                     <li key={category.id}>
                                         <Link to={{
                                                 pathname: `/category/${category.id}/${category.name}`,
-                                            }}
+                                            }} style={{color:'white'}}
                                         >
                                             {category.name}
                                         </Link> 

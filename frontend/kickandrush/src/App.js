@@ -14,6 +14,7 @@ import CreateGallery from "./components/gallery/CreateGallery"
 import UpdateGallery from "./components/gallery/UpdateGallery"
 import NaverRedirectPage from "./components/user/NaverRedirectPage"
 import MainLayout from './layouts/MainLayout'
+import Formation from "./components/formation/Formation"
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
               <Route path="/category/:categoryId/gallery/create" element={<CreateGallery />}/> 
               <Route path="/category/:categoryId/gallery/update/:id" element={<UpdateGallery />}/> 
               <Route path="/callback" element={<NaverRedirectPage />}></Route>
+              <Route path="/category/:categoryId/formation" element={<Formation/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
