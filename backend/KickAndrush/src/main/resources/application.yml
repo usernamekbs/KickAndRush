@@ -43,10 +43,10 @@ spring:
       mail.smtp.ssl.trust: smtp.naver.com
 oauth:
   naver:
-    client-id: XvN4jjQg7N_au_1o1p5w
-    client-secret: 5q8EiienOB
+    client-id: x
+    client-secret: x
     redirect-uri: http://localhost:3000/callback
-    url: https://nid.naver.com/oauth2.0/authorize?response_type=code
-    token: https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&
-#    user-detail: https://openapi.naver.com/v1/nid/token
-    user-detail: https://openapi.naver.com/v1/nid/me
+    url: x
+    token: x
+#    user-detail: x
+    user-detail: x
